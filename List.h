@@ -30,32 +30,32 @@ class List
    
         List();
         //Default constructor; initializes and empty list
-        //Postcondition:
+        //Postcondition: data is empty and next is initialized to NULL
    
         ~List();
         //Destructor. Frees memory allocated to the list
-        //Postcondition:
+        //Postcondition: dynamic memory allocated freed
    
         List(const List &list);
         //Copy construcor. Initializes list to have the same elements as another list
-        //Postcondition:
+        //Postcondition: newly created list is the same as another list
    
         /**Accessors*/
    
    
         int get_start();
         //Returns the first element in the list
-        //Precondition:
+        //Precondition: the list exists or has been initialized, start pointer contains data
    
    
         int get_end();
         //Returns the last element in the list
-        //Precondition:
+        //Precondition: the list exists or has been initialized, end pointer contains data
    
    
         int get_cursor();
         //Returns the element pointed to by the iterator
-        //Precondition:
+        //Precondition: the list exists or has been initialized, cursor pointer contains data
    
    
         bool is_empty();
@@ -76,44 +76,44 @@ class List
         void begin_cursor();
         //Moves the iterator to point to the first element in the list
         //If the list is empty, the iterator remains NULL
-        //Postcondition:
+        //Postcondition: cursor points to the first element in the list
    
    
         void insert_cursor(int data);
         //Inserts a new element into the list in the position after the iterator
-        //Precondition:
-        //Postcondition:
+        //Precondition: cursor is pointing to a node in the list
+        //Postcondition: a new node is positioned after the position where the iterator is pointing
    
         void remove_end();
         //Removes the value of the last element in the list
-        //Precondition:
-        //Postcondition:
+        //Precondition: the list exists or has been initialized, end pointer contains data
+        //Postcondition: the last element in the list will hold no data
    
         void remove_start();
         //Removes the value of the first element in the list
-        //Precondition:
-        //Postcondition:
+        //Precondition: the list exists or has been initialized, start pointer contains data
+        //Postcondition: the first element in the list will hold no data
    
         void add_end(int data);
         //Inserts a new element at the end of the list
         //If the list is empty, the new element becomes both start and end
-        //Postcondition:
+        //Postcondition: new element will be added at the end of the list
    
         void add_start(int data);
         //Inserts a new element at the start of the list
         //If the list is empty, the new element becomes both start and end
-        //Postcondition:
+        //Postcondition: new element will be added at the start of the list
    
    
         void remove_cursor();
         //Removes the element pointed at by the iterator
-        //Precondition:
-        //Postcondition:
+        //Precondition: the list exists or has been initialized, the cursor is pointing at an element in the list
+        //Postcondition: the element which was pointed by the cursor is no more
    
         void move_cursor();
         //Moves the iterator forward by one element in the list
-        //Precondition:
-        //Postcondition:
+        //Precondition: the list exists or has been initialized, the cursor is pointing at an element in the list
+        //Postcondition: the iterator is now ahead by one element in the list than it was before
    
    
         /**Additional List Operations*/

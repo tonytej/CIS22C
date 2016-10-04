@@ -25,12 +25,11 @@ List::~List()
     }
 }
 
-void List::print()
-{
-    NodePtr temp = start; //create a temporary iterator
+void List::print(){
+    NodePtr temp = start; //create a temporary 
     while (temp != NULL) {
-    	cout << cursor->data << " ";
-        temp = cursor->next;
+    	cout << temp->data << " ";
+        temp = temp->next;
     }
     cout << endl; //What does this do?
 }
@@ -50,12 +49,14 @@ void List::add_start(int data){
 
 void List::add_end(int data){
 	if (length==0) {
+
         start = new Node(data);
         end = start;
+
     } else {
     	NodePtr N = new Node(data);
     	end->next = N;
-    	end = N;
+    	end = end->next;
     }
     length++;
 }
