@@ -34,7 +34,7 @@ class List
    
         ~List();
         //Destructor. Frees memory allocated to the list
-        //Postcondition: dynamic memory allocated freed
+        //Postcondition: dynamic memory allocated freed, no memory leaks
    
         List(const List &list);
         //Copy construcor. Initializes list to have the same elements as another list

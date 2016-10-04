@@ -76,5 +76,3 @@ int List::get_start(){
 int List::get_end(){
 	return end->data;
 }
-
-
