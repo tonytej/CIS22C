@@ -5,6 +5,7 @@ Lab 1
 */
 
 #include "List.h"
+#include <assert.h>
 #include <iostream>
 using namespace std;
 
@@ -44,7 +45,6 @@ void List::add_start(int data){
         start = N;//make the start be the new node
     }
     length++;
-
 }
 
 void List::add_end(int data){
@@ -69,10 +69,12 @@ int List::get_length(){
 	return length;
 }
 
-int List::get_start(){      
+int List::get_start(){     
+    assert(start != NULL); 
     return start->data;
 }
 
 int List::get_end(){
+    assert(end != NULL);
 	return end->data;
 }
