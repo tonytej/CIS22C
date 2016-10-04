@@ -5,6 +5,8 @@ Lab 1
 */
 
 #include "List.h"
+#include <iostream>
+using namespace std;
 
 List::List(): start(NULL), end(NULL), cursor(NULL), length(0) {}
 
