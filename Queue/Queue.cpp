@@ -9,7 +9,7 @@ Queue.cpp
 #include <assert.h>
 using namespace std;
 
-Queue::Queue(){}
+Queue::Queue(): front(NULL), end(NULL), length(0) {}
 
 Queue::Queue(const Queue &queue):length(queue.length){
         if(queue.front == NULL){
@@ -86,6 +86,10 @@ string Queue::get_front() {
 
 int Queue::get_length(){
     return length;
+}
+
+bool Queue::is_empty(){
+    return (length==0);
 }
 
 void Queue::print(){
