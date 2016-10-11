@@ -1,3 +1,9 @@
+/*
+Antony Tejakusuma
+CIS22C
+Queue.h
+*/
+
 #ifndef QUEUE_H_
 #define QUEUE_H_
 
@@ -6,8 +12,7 @@
 #include <cstddef>
 using namespace std;
 
-class Queue
-{
+class Queue{
     public:
         /**constructors and destructors*/
 
@@ -53,10 +58,8 @@ class Queue
         void print();
         //prints the elements in the queue in a programmer-specified format to stdout
 
-
     private:
-        struct Node
-        {
+        struct Node{
             string data;
             Node* next;
             Node(): next(NULL), data(""){}
@@ -68,7 +71,6 @@ class Queue
         NodePtr front;
         NodePtr end;
         int length;
-
 };
 
 

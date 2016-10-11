@@ -1,3 +1,9 @@
+/*
+Antony Tejakusuma
+CIS22C
+Queue.cpp
+*/
+
 #include <iostream>
 #include "Queue.h"
 #include <assert.h>
@@ -5,42 +11,29 @@ using namespace std;
 
 Queue::Queue(){}
 
-Queue::Queue(const Queue &queue):length(queue.length)
-{
-    {
-        if(queue.front == NULL)
-        {
+Queue::Queue(const Queue &queue):length(queue.length){
+        if(queue.front == NULL){
             end = front = NULL;
-        }
-       else
-        {
+        } else {
             front = new Node;
             front->data = queue.front->data;
             NodePtr temp;
             temp = queue.front;
             NodePtr qtemp = front; //create temporary iterator
-
-            while(temp->next != NULL)
-            {
-
+            while(temp->next != NULL){
                 qtemp->next = new Node;
                 qtemp = qtemp->next;
                 temp = temp->next;
                 qtemp->data = temp->data;
-
             }
-
             end = qtemp;
         }
-    }
 }
 
-Queue::~Queue()
-{
+Queue::~Queue(){
     NodePtr temp = front;
     NodePtr temp2 = front;
-    while (temp != NULL)
-    {
+    while (temp != NULL){
         temp = temp->next;
         delete temp2;
         temp2 = temp;
@@ -95,12 +88,10 @@ int Queue::get_length(){
     return length;
 }
 
-void Queue::print()
-{
+void Queue::print(){
     NodePtr temp;
     temp = front;
-    while (temp != NULL)
-    {
+    while (temp != NULL){
         cout << temp->data << " ";
         temp = temp->next;
     }
