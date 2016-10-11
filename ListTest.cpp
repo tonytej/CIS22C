@@ -10,7 +10,7 @@ using namespace std;
 
 int main()
 {
-    /*
+    
     //creating a new list object L
     List<int> L;
 
@@ -102,7 +102,7 @@ int main()
     if(L1.is_empty())   
         cout << "List is empty" << endl;
     else
-        cout << "List is not empty" << endl;*/
+        cout << "List is not empty" << endl;
 
     List<int> L;
     L.add_start(5);
@@ -110,9 +110,11 @@ int main()
     L.add_end(9);
     L.add_end(11);
     L.print();
+    cout << L.get_length() << endl;
     L.remove_start();
     L.remove_end();
     L.print();
+    cout << L.get_length() << endl;
 
     List<string> L1;
     L1.add_start("Albert");
@@ -120,10 +122,25 @@ int main()
     L1.add_end("Kevin");
     L1.add_end("Tandar");
     L1.print();
+    cout << L1.get_length() << endl;
     L1.remove_start();
     L1.remove_end();
     L1.print();
-
+    cout << L1.get_length() << endl;
+    L1.begin_cursor();
+    L1.insert_cursor("Andre");
+    L1.print();
+    cout << L1.get_length() << endl;
+    L1.move_cursor();
+    L1.remove_cursor();
+    L1.print();
+    cout << L1.get_length() << endl;
+    L1.begin_cursor();
+    L1.move_cursor();
+    L1.remove_cursor();
+    L1.print();
+    cout << L1.get_length() << endl;
+    L1.begin_cursor();
 }
 
 /*

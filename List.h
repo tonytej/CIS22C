@@ -84,7 +84,7 @@ class List
         //Postcondition: cursor points to the first element in the list
    
    
-        void insert_cursor(int data);
+        void add_cursor(listitem data);
         //Inserts a new element into the list in the position after the iterator
         //Precondition: cursor is pointing to a node in the list
         //Postcondition: a new node is positioned after the position where the iterator is pointing
@@ -127,6 +127,8 @@ class List
         //Prints to the console the value of each element in the list sequentially
         //and separated by a blank space
         //Prints nothing if the list is empty
+
+        bool operator==(const List& list);
 };
 
 template <class listitem>
@@ -151,29 +153,48 @@ List<listitem>::List(const List &list): length(list.length){
 }
 
 template <class listitem>
-List<listitem>::~List()
-{
+List<listitem>::~List(){
     cursor = start;
     NodePtr temp;
-    while(cursor != NULL)
-    {
+    while(cursor != NULL){
         temp = cursor->next;
-
         delete cursor;
-
         cursor = temp;
-
     }
 }
 
 template <class listitem>
-void List<listitem>::print(){
-    NodePtr temp = start; //create a temporary 
-    while (temp != NULL) {
-        cout << temp->data << " ";
-        temp = temp->next;
+void List<listitem>::remove_start(){
+    assert(length != 0);
+    if (length==1){
+        delete start;
+        start = end = cursor = NULL;
+        length = 0;
+    } else {
+        if (cursor == start)
+            cursor = NULL;
+        start = start->next; //make the start pointer point to the second node in the List
+        delete start->previous; //delete the original start
+        start->previous = NULL;
+        length--;
     }
-    cout << endl; //What does this do?
+}
+
+template <class listitem>
+void List<listitem>::remove_end(){
+    assert(length != 0);
+    if (length==1){
+        delete start;
+        start = end = cursor = NULL;
+        length = 0;
+    } else {
+        if (cursor == end)
+            cursor = NULL;
+        end = end->previous; //make the start pointer point to the second node in the List
+        delete end->next; //delete the original start
+        end->next = NULL;
+        length--;
+    }
 }
 
 template <class listitem>
@@ -191,23 +212,6 @@ void List<listitem>::add_start(listitem data){
 }
 
 template <class listitem>
-void List<listitem>::remove_start(){
-    assert(length != 0);
-    if (length==1){
-        delete start;
-        start = end = cursor = NULL;
-        length = 0;
-    } else {
-        if (cursor == start)
-            cursor = NULL;
-        NodePtr temp = start; //store original start node in a temporary variable
-        start = start->next; //make the start pointer point to the second node in the List
-        delete temp; //delete the original start
-        length--;
-    }
-}
-
-template <class listitem>
 void List<listitem>::add_end(listitem data){
     if (length==0) {
         start = new Node(data);
@@ -221,37 +225,46 @@ void List<listitem>::add_end(listitem data){
     length++;
 }
 
-template <class listitem>
-void List<listitem>::remove_end(){
-    assert(length != 0);
-    if (length==1){
-        delete start;
-        start = end = cursor = NULL;
-        length = 0;
+template<class listitem>
+void List<listitem>::begin_cursor(){
+    assert(length!=0);
+    cursor = start;
+}
+
+template<class listitem>
+void List<listitem>::remove_cursor(){
+    assert(!off_end());
+    if(cursor==start){
+        remove_start();
     } else {
-        if (cursor == end)
-            cursor = NULL;
-        NodePtr temp = end; //store original start node in a temporary variable
-        end = end->previous; //make the start pointer point to the second node in the List
-        end->next = NULL;
-        delete temp; //delete the original start
+        cursor->previous->next = cursor->next;
+        if(cursor!=end)
+            cursor->next->previous = cursor->previous;
+        delete cursor;
+        cursor = NULL;
         length--;
     }
 }
 
 template<class listitem>
-void List<listitem>::begin_cursor(){
-    
+void List<listitem>::add_cursor(listitem data){
+    assert(!off_end());
+    if(cursor==end){
+        add_end(data);
+    } else {
+        NodePtr N = new Node(data);
+        N->next = cursor->next;
+        N->previous = cursor;  
+        N->next->previous = N;
+        cursor->next = N;
+        length++;
+    }
 }
 
-template <class listitem>
-bool List<listitem>::is_empty(){
-    return (length==0);
-}
-
-template <class listitem>
-int List<listitem>::get_length(){
-    return length;
+template<class listitem>
+void List<listitem>::move_cursor(){
+    assert(!off_end());
+    cursor = cursor->next;
 }
 
 template <class listitem>
@@ -265,3 +278,67 @@ listitem List<listitem>::get_end(){
     assert(end != NULL);
     return end->data;
 }
+
+template <class listitem>
+bool List<listitem>::is_empty(){
+    return (length==0);
+}
+
+template <class listitem>
+int List<listitem>::get_length(){
+    return length;
+}
+
+template <class listitem>
+listitem List<listitem>::get_cursor(){
+    assert(!off_end());  
+    return cursor->data;
+}
+
+template<class listitem>
+bool List<listitem>::off_end(){
+    return (cursor==NULL);
+}
+
+template <class listitem>
+void List<listitem>::print(){
+    NodePtr temp = start; //create a temporary 
+    while (temp != NULL) {
+        cout << temp->data << " ";
+        temp = temp->next;
+    }
+    cout << endl; //What does this do?
+}
+
+template <class listitem>
+bool List<listitem>::operator==(const List& list){
+    if(length != list.length)
+        return false;
+    NodePtr temp1 = start;
+    NodePtr temp2 = list.start;
+    while(temp1 != NULL){
+        if(temp1->data != temp2->data)
+            return false;
+        temp1 = temp1->next;
+        temp2 = temp2->next;
+    }
+    return true;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
