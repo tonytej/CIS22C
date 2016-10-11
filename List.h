@@ -1,7 +1,7 @@
 /*
 Antony Tejakusuma
 CIS 22C
-Lab 1
+List.h
 */
 
 #include <cstddef> //for NULL

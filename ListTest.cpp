@@ -1,7 +1,7 @@
 /*
 Antony Tejakusuma
 CIS 22C
-Lab 1
+ListTest.cpp
 */
 
 #include "List.h"
