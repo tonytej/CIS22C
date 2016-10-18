@@ -65,6 +65,7 @@ void Stack::push(string data){
 }
 
 string Stack::get_top(){
+    assert(top!=NULL);
     return top->data;
 }
 
@@ -95,7 +96,3 @@ bool Stack::operator==(const Stack &stack){
     }
     return true;
 }
-
-
-
-

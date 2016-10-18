@@ -24,12 +24,15 @@ int main(){
 
     while(getline(fin, line)){
     	Q1.enqueue(line); // enqueue the original phrases
-        line.erase(remove(line.begin(), line.end(), ' '), line.end()); // Modifications to the phrases in order 
-        line.erase(remove(line.begin(), line.end(), '.'), line.end()); // to simplify the proses of checking Palindromes.
-        line.erase(remove(line.begin(), line.end(), '?'), line.end()); // These characters is not a part of palindrome
-        line.erase(remove(line.begin(), line.end(), '!'), line.end()); // checking and should be removed from the phrases.
-        line.erase(remove(line.begin(), line.end(), ','), line.end()); // The only thing that is needed is the alphabets of
-        line.erase(remove(line.begin(), line.end(), '\''), line.end()); // the phrases.
+    	// The following for loop remove some characters
+    	// of the phrases in order to simplify the 
+        // process of checking Palindromes. The only 
+        // thing that is needed is the alphabets of
+        // the phrases.
+        char chars[] = " .?!,'";
+    	for (unsigned int i = 0; i < strlen(chars); ++i){
+      		line.erase (remove(line.begin(), line.end(), chars[i]), line.end()); // removal of unwanted characters
+   		}
         for(int i = 0; line[i]; i++){
   			line[i] = tolower(line[i]); // another modification. convert every alphabets to lowercase for ease of comparing.
 		}	

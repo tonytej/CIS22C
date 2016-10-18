@@ -81,6 +81,7 @@ bool Queue::operator==(const Queue &queue){
 }
 
 string Queue::get_front() {
+    assert(front!=NULL);
     return front->data;
 }
 

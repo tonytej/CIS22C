@@ -25,7 +25,6 @@ int main(){
     cout << "Length should be 2: " << S.get_length() << endl;
     S.push("T");
     S.push("O");
-
     Stack S1(S);
     cout << "Should print Same stack: ";
     if(S==S1){
