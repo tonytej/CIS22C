@@ -6,7 +6,6 @@ Stack.cpp
 
 #include "Stack.h"
 #include <iostream>
-#include <assert.h>
 
 using namespace std;
 
@@ -24,9 +23,9 @@ void Stack::push(int data){
     stack.add_start(data);
 }
 
-/*bool Stack::operator==(const Stack &S){
-
-}*/
+bool Stack::operator==(const Stack &S){
+    return (stack == S.stack);
+}
 
 int Stack::get_top(){
     stack.get_start();
