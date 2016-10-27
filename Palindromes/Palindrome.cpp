@@ -4,10 +4,12 @@ CIS 22C
 Palindrome.cpp
 */
 
+#include <algorithm>
 #include "Stack.cpp"
 #include "Queue.cpp"
 #include <iostream>
 #include <fstream>
+#include <cstring>
 using namespace std;
 
 int main(){
