@@ -1,3 +1,9 @@
+/*
+Antony Tejakusuma
+CIS22C
+Stack.h
+*/
+
 #ifndef Stack_H_
 #define Stack_H_
 
