@@ -10,7 +10,18 @@ using namespace std;
 
 int main()
 {
-    cout << "TESTING BASIC FUNCTIONS" << endl;
+    List <int> L;
+    L.add_start(5);
+    L.add_start(10);
+    L.add_start(15);
+    L.add_start(20);
+    L.add_start(25);
+    L.add_start(30);
+    cout << "Normal print: ";
+    L.print();
+    cout << "Reverse print: ";
+    L.print_reverse();
+   /* cout << "TESTING BASIC FUNCTIONS" << endl;
     //creating a new list object L
     List<int> L;
 
@@ -159,7 +170,7 @@ int main()
         cout << "Cursor off the end of the list" << endl;
     } else {
         cout << "Cursor is not off the end of the list" << endl;
-    }
+    }*/
 }
 
 /*

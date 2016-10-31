@@ -29,6 +29,10 @@ class List
              NodePtr cursor;
    
              int length;
+
+             void reverse(NodePtr node);
+             //Helper function for the public printReverse() function
+             //Recursively prints the data ina a List in reverse
     public:
    
         /**Constructors and Destructors*/
@@ -127,6 +131,10 @@ class List
         //Prints to the console the value of each element in the list sequentially
         //and separated by a blank space
         //Prints nothing if the list is empty
+    
+        void print_reverse();
+        //Wrapper function that calls the reverse helper function to print a list in reverse
+        //prints nothing if the list is empty
 
         bool operator==(const List& list);
 };
@@ -323,6 +331,19 @@ bool List<listitem>::operator==(const List& list){
         temp2 = temp2->next;
     }
     return true;
+}
+
+template <class listitem>
+void List<listitem>::reverse(NodePtr node){
+    if (node == NULL)
+        return;
+    reverse(node->previous);
+    cout << node->data << " ";
+}
+
+template<class listitem>
+void List<listitem>::print_reverse(){
+    reverse(end);
 }
 
 
