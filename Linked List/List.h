@@ -79,9 +79,17 @@ class List
         int get_length();
         //Returns the length of the list
    
-   
+        int get_index();
+        //Indicates the index of the Node where the iterator is currently pointing
+        //Nodes are numbered from 1 to length of the list
+
+
         /**Manipulation Procedures*/
-   
+        
+        void scroll_to_index(int index);
+        //Moves the iterator to the node whose index is specified by the user
+        //pre: length != 0
+
         void begin_cursor();
         //Moves the iterator to point to the first element in the list
         //If the list is empty, the iterator remains NULL
@@ -126,7 +134,20 @@ class List
    
    
         /**Additional List Operations*/
-              
+           
+        int linear_search(listitem item);
+        //Searchs the list, element by element, from the start of the List to the end of the list
+        //Returns the index of the element, if it is found in the list
+        //Returns -1 if the element is not in the List
+        //Pre: length != 0
+
+        int binary_search(int low, int high, listitem item);
+        //Recursively searchs the list by dividing the search space in half
+        //Returns the index of the element, if it is found in the List
+        //Returns -1 if the element is not in the List
+        //Pre: length !=0
+        //Pre: list is sorted (must test on a sorted list)
+
         void print();
         //Prints to the console the value of each element in the list sequentially
         //and separated by a blank space
@@ -337,17 +358,64 @@ template <class listitem>
 void List<listitem>::reverse(NodePtr node){
     if (node == NULL)
         return;
-    reverse(node->previous);
     cout << node->data << " ";
+    reverse(node->previous);
 }
 
 template<class listitem>
 void List<listitem>::print_reverse(){
     reverse(end);
+    cout << endl;
 }
 
+template<class listitem>
+int List<listitem>::get_index(){
+    assert(length!=0);
+    assert(!off_end());
+    NodePtr temp = start;
+    int count = 1;
+    while(temp != cursor){
+        temp = temp->next;
+        count++;
+    }
+    return count;
+}
 
+template<class listitem>
+void List<listitem>::scroll_to_index(int index){
+    assert(length!=0);
+    assert(index<=length);
+    begin_cursor();
+    for(int i = 1; i < index; i++){
+        move_cursor();
+    }
+}
 
+template<class listitem>
+int List<listitem>::linear_search(listitem item){
+    begin_cursor();
+    while(cursor != NULL){
+        if(get_cursor() == item)
+            return get_index();
+        move_cursor();
+    }
+    return -1;
+}
+
+template<class listitem>
+int List<listitem>::binary_search(int low, int high, listitem item){
+    if(high < low)
+        return -1;
+    int mid = low + (high-low)/2;
+    scroll_to_index(mid);
+    if(get_cursor() == item){
+        return mid;
+    } else if (item < get_cursor()){
+        return binary_search(low, mid-1, item);
+    } else {
+        return binary_search(mid+1, high, item);
+    }
+}
 
 
 

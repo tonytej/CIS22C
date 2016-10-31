@@ -10,18 +10,7 @@ using namespace std;
 
 int main()
 {
-    List <int> L;
-    L.add_start(5);
-    L.add_start(10);
-    L.add_start(15);
-    L.add_start(20);
-    L.add_start(25);
-    L.add_start(30);
-    cout << "Normal print: ";
-    L.print();
-    cout << "Reverse print: ";
-    L.print_reverse();
-   /* cout << "TESTING BASIC FUNCTIONS" << endl;
+    cout << "TESTING BASIC FUNCTIONS" << endl;
     //creating a new list object L
     List<int> L;
 
@@ -170,7 +159,54 @@ int main()
         cout << "Cursor off the end of the list" << endl;
     } else {
         cout << "Cursor is not off the end of the list" << endl;
-    }*/
+    }
+    
+    cout << endl;
+    cout << "TESTING REVERSE PRINTING" << endl;
+    List <int> L4;
+    L4.add_start(30);
+    L4.add_start(25);
+    L4.add_start(20);
+    L4.add_start(15);
+    L4.add_start(10);
+    L4.add_start(5);
+    cout << "Normal print: ";
+    L4.print();
+    cout << "Reverse print: ";
+    L4.print_reverse();
+    List<string> L5;
+    L5.add_start("Tony");
+    L5.add_start("Kevin");
+    L5.add_start("Edric");
+    L5.add_start("Andre");
+    cout << "Normal print: ";
+    L5.print();
+    cout << "Reverse print: ";
+    L5.print_reverse();
+    cout << endl;
+    
+    cout << "TESTING INDEX OPERATIONS" << endl;
+    L4.begin_cursor();
+    cout << "Begin cursor." << endl;
+    cout << "Should print 1: " << L4.get_index() << endl;
+    L4.scroll_to_index(3);
+    cout << "Scrolled to index 3." << endl;
+    cout << "Should print 3: " << L4.get_index() << endl;
+    L4.scroll_to_index(1);
+    cout << "Scrolled to index 1." << endl;
+    cout << "Should print 1: " << L4.get_index() << endl;
+    L4.scroll_to_index(5);
+    cout << "Scrolled to index 5." << endl;
+    cout << "Should print 5: " << L4.get_index() << endl << endl;
+
+    cout << "TESTING SEARCH OPERATIONS" << endl;
+    cout << "Linear Searching for 20. Should print 4: " << L4.linear_search(20) << endl;
+    cout << "Linear Searching for 5. Should print 1: " << L4.linear_search(5) << endl;
+    cout << "Linear Searching for 30. Should print 6: " << L4.linear_search(30) << endl;
+
+    cout << "Binary Searching for 20. Should print 4: " << L4.binary_search(1, L4.get_length(), 20) << endl;
+    cout << "Binary Searching for 5. Should print 1: " << L4.binary_search(1, L4.get_length(), 5) << endl;
+    cout << "Binary Searching for 30. Should print 6: " << L4.binary_search(1, L4.get_length(), 30) << endl;
 }
 
 /*
@@ -240,4 +276,28 @@ Should print Albert: Albert
 Should print 1: 1
 Should print nothing: 
 Cursor off the end of the list
+
+TESTING REVERSE PRINTING
+Normal print: 5 10 15 20 25 30
+Reverse print: 30 25 20 15 10 5
+Normal print: Andre Edric Kevin Tony
+Reverse print: Tony Kevin Edric Andre
+
+TESTING INDEX OPERATIONS
+Begin cursor.
+Should print 1: 1
+Scrolled to index 3.
+Should print 3: 3
+Scrolled to index 1.
+Should print 1: 1
+Scrolled to index 5.
+Should print 5: 5
+
+TESTING SEARCH OPERATIONS
+Linear Searching for 20. Should print 4: 4
+Linear Searching for 5. Should print 1: 1
+Linear Searching for 30. Should print 6: 6
+Binary Searching for 20. Should print 4: 4
+Binary Searching for 5. Should print 1: 1
+Binary Searching for 30. Should print 6: 6
 */
