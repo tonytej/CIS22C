@@ -33,6 +33,10 @@ class BinarySearchTree
         NodePtr removeHelper(NodePtr root, bstitem value);
 
         bool findHelper(NodePtr root, bstitem value);
+        
+        int getSizeHelper(NodePtr root);
+
+        int getHeightHelper(NodePtr root);
 
         void insertHelper(NodePtr root, bstitem value);
         //private helper function for insert
@@ -118,7 +122,7 @@ bstitem BinarySearchTree<bstitem>::minimumHelper(NodePtr root){
     while(root != NULL){
         root = root->left;
     }
-    return (root->left);
+    return (root->data);
 }
 
 template<class bstitem>
@@ -132,7 +136,7 @@ bstitem BinarySearchTree<bstitem>::maximumHelper(NodePtr root){
     while(root != NULL){
         root = root->right;
     }
-    return (root->left);
+    return (root->data);
 }
 
 template<class bstitem>
@@ -147,12 +151,17 @@ bool BinarySearchTree<bstitem>::isEmpty(){
 }
 
 template<class bstitem>
-int BinarySearchTree<bstitem>::getSize(){
+int BinarySearchTree<bstitem>::getSizeHelper(NodePtr root){
     if (root == NULL){
         return 0;
     } else {
-        return (getSize(root->left) + 1 + getSize(root->right));
+        return (getSizeHelper(root->left) + 1 + getSizeHelper(root->right));
     }
+}
+
+template<class bstitem>
+int BinarySearchTree<bstitem>::getSize(){
+   return getSizeHelper(root);   
 }
 
 template<class bstitem>
@@ -162,14 +171,18 @@ bstitem BinarySearchTree<bstitem>::getRoot(){
 }
 
 template<class bstitem>
+int BinarySearchTree<bstitem>::getHeightHelper(NodePtr root){
+    if(root == NULL){
+        return -1;
+    } else {
+        return (max(getHeightHelper(root->left), getHeightHelper(root->right)) + 1);
+    }
+}
+
+template<class bstitem>
 int BinarySearchTree<bstitem>::getHeight(){
     assert(!isEmpty());
-    NodePtr temp = root;
-    if(temp == NULL){
-        return 0;
-    } else {
-        return (max(getHeight(temp->left), getHeight(temp->right)) + 1);
-    }
+    return getHeightHelper(root); 
 }
 
 template<class bstitem>
@@ -242,15 +255,15 @@ typename BinarySearchTree<bstitem>::NodePtr BinarySearchTree<bstitem>::removeHel
     } else {
         if(root->left == NULL and root->right == NULL){
             delete root;
-        } else if (root->right == NULL){
+        } else if (root->left != NULL and root->right == NULL){
             root->left = root;
             delete root;
-        } else if (root->left ==NULL){
+        } else if (root->right != NULL and root->left == NULL){
             root->right = root;
             delete root;
         } else {
             root->data = minimumHelper(root->right);
-            root->right = removeHelper(root-right, root->data); 
+            root->right = removeHelper(root->right, minimumHelper(root->right)); 
         }
     }
     return root;
@@ -260,7 +273,7 @@ template<class bstitem>
 void BinarySearchTree<bstitem>::remove(bstitem value){
     assert(!isEmpty());
     assert(find(value));
-    root = remove(root, value);
+    root = removeHelper(root, value);
 }
 
 template<class bstitem>
@@ -268,9 +281,9 @@ void BinarySearchTree<bstitem>::inOrderPrintHelper(NodePtr root){
     if(root == NULL){
         return;
     } else {
-        inOrderPrint(root->left);
+        inOrderPrintHelper(root->left);
         cout << root->data << " ";
-        inOrderPrint(root->right);
+        inOrderPrintHelper(root->right);
     }
 }
 
@@ -285,8 +298,8 @@ void BinarySearchTree<bstitem>::preOrderPrintHelper(NodePtr root){
         return;
     } else {
         cout << root->data << " ";
-        preOrderPrint(root->left);
-        preOrderPrint(root->right);
+        preOrderPrintHelper(root->left);
+        preOrderPrintHelper(root->right);
     }
 }
 
