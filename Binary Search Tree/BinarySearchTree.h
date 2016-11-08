@@ -119,10 +119,10 @@ BinarySearchTree<bstitem>::BinarySearchTree() : root(NULL) {}
 
 template<class bstitem>
 bstitem BinarySearchTree<bstitem>::minimumHelper(NodePtr root){
-    while(root != NULL){
+    while(root->left != NULL){
         root = root->left;
     }
-    return (root->data);
+    return root->data;
 }
 
 template<class bstitem>
@@ -133,10 +133,10 @@ bstitem BinarySearchTree<bstitem>::minimum(){
 
 template<class bstitem>
 bstitem BinarySearchTree<bstitem>::maximumHelper(NodePtr root){
-    while(root != NULL){
+    while(root->right != NULL){
         root = root->right;
     }
-    return (root->data);
+    return root->data;
 }
 
 template<class bstitem>
@@ -255,12 +255,15 @@ typename BinarySearchTree<bstitem>::NodePtr BinarySearchTree<bstitem>::removeHel
     } else {
         if(root->left == NULL and root->right == NULL){
             delete root;
+            root = NULL;
         } else if (root->left != NULL and root->right == NULL){
             root->left = root;
             delete root;
+            root = NULL;
         } else if (root->right != NULL and root->left == NULL){
             root->right = root;
             delete root;
+            root = NULL;
         } else {
             root->data = minimumHelper(root->right);
             root->right = removeHelper(root->right, minimumHelper(root->right)); 

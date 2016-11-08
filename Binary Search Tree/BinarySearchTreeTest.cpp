@@ -23,7 +23,7 @@ int main(){
     tree.insert(13);
     
     
-    cout << "Inorder Printing. Should print 2 3 4 5 7 9 10 12 13 45: ";
+    cout << "Inorder Printing. Should print 2 3 4 6 7 9 10 12 13 45: ";
     tree.inOrderPrint();
     cout << endl << "Preorder Printing. Should print 12 6 3 2 4 9 7 10 45 13: ";
     tree.preOrderPrint();
@@ -31,8 +31,8 @@ int main(){
     tree.postOrderPrint();
     cout << endl;
     
-    //cout << "Minimum value. Should print 2: " << tree.minimum() << endl;
-    //cout << "Maximum value. Should print 45: " << tree.maximum() << endl;
+    cout << "Minimum value. Should print 2: " << tree.minimum() << endl;
+    cout << "Maximum value. Should print 45: " << tree.maximum() << endl;
     
     if(tree.isEmpty()){
         cout << "Tree is empty" << endl;
@@ -60,7 +60,7 @@ int main(){
 
     cout << "Removing 13. " << endl;
     tree.remove(13);
-    cout << "Inorder Printing. Should print 2 3 4 5 7 9 10 12 45: ";
+    cout << "Inorder Printing. Should print 2 3 4 6 7 9 10 12 45: ";
     tree.inOrderPrint();
     cout << endl << "Preorder Printing. Should print 12 6 3 2 4 9 7 10 45: ";
     tree.preOrderPrint();
