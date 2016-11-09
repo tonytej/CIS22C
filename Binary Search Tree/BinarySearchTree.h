@@ -42,15 +42,15 @@ class BinarySearchTree
         //private helper function for insert
         //recursively inserts a value into the BST
 
-        void inOrderPrintHelper(NodePtr root);
+        void inOrderPrintHelper(NodePtr root, ostream& s);
         //private helper function for inOrderPrint
         //recursively prints tree values in order from smallest to largest
 
-        void preOrderPrintHelper(NodePtr root);
+        void preOrderPrintHelper(NodePtr root, ostream& s);
         //private helper function for preOrderPrint
         //recursively prints tree values in preorder
 
-        void postOrderPrintHelper(NodePtr root);
+        void postOrderPrintHelper(NodePtr root, ostream& s);
         //private helper function for postOrderPrint
         //recursively prints tree values in postorder
 
@@ -96,17 +96,17 @@ class BinarySearchTree
         //Pre: !isEmpty()
         //Pre: The value is contained in the Binary Search tree
 
-        void inOrderPrint();
+        void inOrderPrint(ostream& s);
         //calls the inOrderPrintHelper function to print out the values
         //stored in the Binary Search Tree
         //If the tree is empty, prints nothing
 
-        void preOrderPrint();
+        void preOrderPrint(ostream& s);
         //calls the preOrderPrintHelper function to print out the values
         //stored in the Binary Search Tree
         //If the tree is empty, prints nothing
 
-        void postOrderPrint();
+        void postOrderPrint(ostream& s);
         //calls the postOrderPrintHelper function to print out the values
         //stored in the Binary Search Tree
         //If the tree is empty, prints nothing
@@ -280,50 +280,50 @@ void BinarySearchTree<bstitem>::remove(bstitem value){
 }
 
 template<class bstitem>
-void BinarySearchTree<bstitem>::inOrderPrintHelper(NodePtr root){
+void BinarySearchTree<bstitem>::inOrderPrintHelper(NodePtr root, ostream& s){
     if(root == NULL){
         return;
     } else {
-        inOrderPrintHelper(root->left);
-        cout << root->data << " ";
-        inOrderPrintHelper(root->right);
+        inOrderPrintHelper(root->left, s);
+        s << root->data << " ";
+        inOrderPrintHelper(root->right, s);
     }
 }
 
 template<class bstitem>
-void BinarySearchTree<bstitem>::inOrderPrint(){
-   inOrderPrintHelper(root);
+void BinarySearchTree<bstitem>::inOrderPrint(ostream& s){
+   inOrderPrintHelper(root, s);
 }
 
 template<class bstitem>
-void BinarySearchTree<bstitem>::preOrderPrintHelper(NodePtr root){
+void BinarySearchTree<bstitem>::preOrderPrintHelper(NodePtr root, ostream& s){
     if(root == NULL){
         return;
     } else {
-        cout << root->data << " ";
-        preOrderPrintHelper(root->left);
-        preOrderPrintHelper(root->right);
+        s << root->data << " ";
+        preOrderPrintHelper(root->left, s);
+        preOrderPrintHelper(root->right, s);
     }
 }
 
 template<class bstitem>
-void BinarySearchTree<bstitem>::preOrderPrint(){
-    preOrderPrintHelper(root);
+void BinarySearchTree<bstitem>::preOrderPrint(ostream& s){
+    preOrderPrintHelper(root, s);
 }
 
 template<class bstitem>
-void BinarySearchTree<bstitem>::postOrderPrintHelper(NodePtr root){
+void BinarySearchTree<bstitem>::postOrderPrintHelper(NodePtr root, ostream& s){
     if(root == NULL){
         return;
     } else {
-        postOrderPrintHelper(root->left);
-        postOrderPrintHelper(root->right);
-        cout << root->data << " ";
+        postOrderPrintHelper(root->left, s);
+        postOrderPrintHelper(root->right, s);
+        s << root->data << " ";
     }
 }
 
 template<class bstitem>
-void BinarySearchTree<bstitem>::postOrderPrint(){
-    postOrderPrintHelper(root);
+void BinarySearchTree<bstitem>::postOrderPrint(ostream& s){
+    postOrderPrintHelper(root, s);
 }
 

@@ -20,15 +20,14 @@ int main(){
     tree.insert(10);
     tree.insert(2);
     tree.insert(4);
-    tree.insert(13);
-    
-    
+    tree.insert(13); 
+    cout << "Inserted some integers to the tree." << endl;    
     cout << "Inorder Printing. Should print 2 3 4 6 7 9 10 12 13 45: ";
-    tree.inOrderPrint();
+    tree.inOrderPrint(cout);
     cout << endl << "Preorder Printing. Should print 12 6 3 2 4 9 7 10 45 13: ";
-    tree.preOrderPrint();
+    tree.preOrderPrint(cout);
     cout << endl << "Postorder Printing. Should print 2 4 3 7 10 9 6 13 45 12: ";
-    tree.postOrderPrint();
+    tree.postOrderPrint(cout);
     cout << endl;
     
     cout << "Minimum value. Should print 2: " << tree.minimum() << endl;
@@ -61,10 +60,30 @@ int main(){
     cout << "Removing 13. " << endl;
     tree.remove(13);
     cout << "Inorder Printing. Should print 2 3 4 6 7 9 10 12 45: ";
-    tree.inOrderPrint();
+    tree.inOrderPrint(cout);
     cout << endl << "Preorder Printing. Should print 12 6 3 2 4 9 7 10 45: ";
-    tree.preOrderPrint();
+    tree.preOrderPrint(cout);
     cout << endl << "Postorder Printing. Should print 2 4 3 7 10 9 6 45 12: ";
-    tree.postOrderPrint();
+    tree.postOrderPrint(cout);
     cout << endl;
+
+    cout << "Minimum value. Should print 2: " << tree.minimum() << endl;
+    cout << "Maximum value. Should print 45: " << tree.maximum() << endl;
+    
+    if(tree.isEmpty()){
+        cout << "Tree is empty" << endl;
+    } else {
+        cout << "Tree is not empty" << endl;
+    }
+
+    cout << "Size. Should print 9: " << tree.getSize() << endl;
+    cout << "Root. Should print 12: " << tree.getRoot() << endl;
+    cout << "Height. Should print 3: " << tree.getHeight() << endl;
+    
+    cout << "Finding 13. ";
+    if(tree.find(13)){
+        cout << "Found 15" << endl;
+    } else {
+        cout << "Did not find 13" << endl;
+    }
 }
