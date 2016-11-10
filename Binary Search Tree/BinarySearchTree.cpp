@@ -22,44 +22,47 @@ int main(){
 
     string line;
     int count = 1;
-
+    BinarySearchTree<int>* tree = new BinarySearchTree<int>();
     while(getline(fin, line)){
-        BinarySearchTree<int> tree;
         if(count == 1){
             istringstream iss(line);
             string word;
             int num;
             while(iss >> word){
                 num = stoi(word);
-                tree.insert(num);
+                tree->insert(num);
+                cout << "inserted" << endl;
             }
-            tree.preOrderPrint(fout);
+            tree->preOrderPrint(fout);
             fout << endl;
-            tree.inOrderPrint(fout);
+            tree->inOrderPrint(fout);
             fout << endl;
             count++;
+            
         } else if (count == 2){
+
             int num = stoi(line);
-            if(tree.find(num)){
+            if(tree->find(num)){
                 fout << num << " was found in the Binary Search Tree" << endl;
-                tree.remove(num);
+                tree->remove(num);
             } else {
                 fout << num << " was not found in the Binary Search Tree" << endl;
             }
             count++;
         } else {
             int num = stoi(line);
-            tree.insert(num);
-            tree.postOrderPrint(fout);
+            tree->insert(num);
+            tree->postOrderPrint(fout);
             fout << endl;
-            fout << "The root of the tree is " << tree.getRoot() << endl;
-            fout << "The maximum value is " << tree.maximum() << endl;
-            fout << "The minimum value is " << tree.minimum() << endl;
-            fout << "The size of the binary tree is " << tree.getSize() << endl;
-            fout << "The height of the binary tree is " << tree.getHeight() << endl << endl;
+            fout << "The root of the tree is " << tree->getRoot() << endl;
+            fout << "The maximum value is " << tree->maximum() << endl;
+            fout << "The minimum value is " << tree->minimum() << endl;
+            fout << "The size of the Binary Search Tree is " << tree->getSize() << endl;
+            fout << "The height of the Binary Search Tree is " << tree->getHeight() << endl << endl;
             count = 1;
             line = "";
-            
+            delete tree;
+            BinarySearchTree<int>* tree = new BinarySearchTree<int>();
         }
     }
 }

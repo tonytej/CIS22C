@@ -256,14 +256,14 @@ typename BinarySearchTree<bstitem>::NodePtr BinarySearchTree<bstitem>::removeHel
         if(root->left == NULL and root->right == NULL){
             delete root;
             root = NULL;
-        } else if (root->left != NULL and root->right == NULL){
-            root->left = root;
-            delete root;
-            root = NULL;
-        } else if (root->right != NULL and root->left == NULL){
-            root->right = root;
-            delete root;
-            root = NULL;
+        } else if (root->right == NULL){
+            NodePtr temp = root;
+            root = root->left;
+            delete temp;
+        } else if (root->left == NULL){
+            NodePtr temp = root;
+            root = root->right;
+            delete temp;
         } else {
             root->data = minimumHelper(root->right);
             root->right = removeHelper(root->right, minimumHelper(root->right)); 
