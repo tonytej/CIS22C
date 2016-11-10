@@ -1,3 +1,9 @@
+/*
+Antony Tejakusuma
+CIS22C
+BinarySearchTree.h
+*/
+
 #ifndef BINARYSEARCHTREE_H_
 #define BINARYSEARCHTREE_H_
 

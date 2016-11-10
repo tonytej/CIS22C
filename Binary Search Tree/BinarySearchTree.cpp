@@ -16,10 +16,8 @@ int main(){
     if(fin.fail()){
         cout << "Input file failed to open.\n";
         exit(-1);
-    }
-    
+    } 
     ofstream fout("outfile.txt");
-
     string line;
     int count = 1;
     BinarySearchTree<int>* tree = new BinarySearchTree<int>();
@@ -31,16 +29,13 @@ int main(){
             while(iss >> word){
                 num = stoi(word);
                 tree->insert(num);
-                cout << "inserted" << endl;
             }
             tree->preOrderPrint(fout);
             fout << endl;
             tree->inOrderPrint(fout);
             fout << endl;
             count++;
-            
         } else if (count == 2){
-
             int num = stoi(line);
             if(tree->find(num)){
                 fout << num << " was found in the Binary Search Tree" << endl;
@@ -65,4 +60,5 @@ int main(){
             BinarySearchTree<int>* tree = new BinarySearchTree<int>();
         }
     }
+    delete tree;
 }
