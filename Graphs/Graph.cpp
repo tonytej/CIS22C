@@ -26,7 +26,7 @@ int Graph::get_num_edges(){
     for(int i = 0; i < adj.size(); ++i){
         sum += adj[i].get_length();
     }
-    return sum;
+    return sum/2;
 }
 
 int Graph::get_num_vertices(){
@@ -46,7 +46,12 @@ void Graph::print_graph(ostream& output){
     for(unsigned i = 0; i < adj.size(); i++){
         if(!adj[i].is_empty()){
             output << i << ": "; 
-            adj[i].print();
+            adj[i].begin_cursor();
+            while(!adj[i].off_end()){
+                output << adj[i].get_cursor() << " ";
+                adj[i].move_cursor();
+            }
+            output << endl;
         }
     }
 }
@@ -100,13 +105,13 @@ void Graph::print_path(int source, int destination, ostream& output){
 }
 
 void Graph::calculate_distance(int source, int destination, ostream& output){
-    breadth_first_search(source);
-    if (parent[destination] == 0){
-        output << "infinity" << endl;
+    if (distance[destination] == -1){
+        output << "The distance from " << source << " to " << destination << " is infinity" << endl; 
     } else {
-        output << distance[destination] << endl;
+        output << "The distance from " << source << " to " << destination << " is " <<  distance[destination] << endl;
     }
 }
+    
 
 
 
