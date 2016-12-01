@@ -40,7 +40,8 @@ void Graph::addEdge(int u, int v){
 void Graph::print_graph(ostream& output){
     for(unsigned i = 0; i < adj.size(); i++){
         if(!is_empty()){
-            output << i << ": " << adj[i].print();
+            output << i << ": "; 
+            adj[i].print();
         }
     }
 }
@@ -82,7 +83,7 @@ void Graph::breadth_first_search(int source){
 
 }
 
-void Graph::print_path(int source, int destination, ostream output){
+void Graph::print_path(int source, int destination, ostream& output){
     if (destination == source){
         output << source << endl;
     } else if (parent[destination] == 0){

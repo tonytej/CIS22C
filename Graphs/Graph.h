@@ -56,7 +56,7 @@ void breadth_first_search(int source);
 //pre: at least one vertex must exist
 //pre: source is a vertex in the graph
 
-void print_path(int source, int destination, ostream output);
+void print_path(int source, int destination, ostream& output);
 //Prints the path from the source to the destination vertex
 //Prints to the console or to an output file given the ostream parameter
 
