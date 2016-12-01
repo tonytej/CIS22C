@@ -60,6 +60,8 @@ void print_path(int source, int destination, ostream& output);
 //Prints the path from the source to the destination vertex
 //Prints to the console or to an output file given the ostream parameter
 
+void calculate_distance(int source, int destination, ostream& output);
+
 private:
     int vertices, edges; //number of edges and vertices
     vector<List<int> > adj;

@@ -7,20 +7,24 @@ Graph.cpp
 #include "Graph.h"
 #include <queue>
 
+using namespace std;
+
 Graph::Graph(int n){
-    for(unsigned i = 0; i < n; i++){
-            color[i] = 'W';
-            distance[i] = -1;
-            parent[i] = 0;
-        }
+    List<int> L;
+    for(int i = 0; i < n + 1; ++i){
+        adj.push_back(L);
+        color.push_back('W');
+        distance.push_back(-1);
+        parent.push_back(0);
+    }
 }
 
 Graph::~Graph(){}
 
 int Graph::get_num_edges(){
     int sum;
-    for(auto & i : adj){
-        sum += i.get_length();
+    for(int i = 0; i < adj.size(); ++i){
+        sum += adj[i].get_length();
     }
     return sum;
 }
@@ -35,11 +39,12 @@ bool Graph::is_empty(){
 
 void Graph::addEdge(int u, int v){
     adj[u].add_end(v);
+    adj[v].add_end(u);
 }
 
 void Graph::print_graph(ostream& output){
     for(unsigned i = 0; i < adj.size(); i++){
-        if(!is_empty()){
+        if(!adj[i].is_empty()){
             output << i << ": "; 
             adj[i].print();
         }
@@ -49,7 +54,7 @@ void Graph::print_graph(ostream& output){
 void Graph::print_BFS(ostream& output){
     output << "v\tc\tp\td" << endl;
     for(unsigned i = 0; i < adj.size(); i++){
-        if(!is_empty()){
+        if(!adj[i].is_empty()){
             output << i << "\t" << color[i] << "\t" <<  parent[i] << "\t" <<  distance[i] << endl;
         }
     }
@@ -85,16 +90,23 @@ void Graph::breadth_first_search(int source){
 
 void Graph::print_path(int source, int destination, ostream& output){
     if (destination == source){
-        output << source << endl;
+        output << source << " ";
     } else if (parent[destination] == 0){
         output << "No path from " << source << " to " << destination << " exists" << endl;
     } else {
         print_path(source, parent[destination], output);
+        output << destination << " ";
     }
-
 }
 
-
+void Graph::calculate_distance(int source, int destination, ostream& output){
+    breadth_first_search(source);
+    if (parent[destination] == 0){
+        output << "infinity" << endl;
+    } else {
+        output << distance[destination] << endl;
+    }
+}
 
 
 
