@@ -40,10 +40,11 @@ int main(){
 
     	for(int i = 0; i < vec.size(); i++){
     		for(int j = 0; j < 20; j++){
-
     			if(vec[i] == useless[j]){
-    				cout << vec[i] << endl;
-    				vec.erase(remove(vec.begin(), vec.end(), vec[i]), vec.end());
+    				vec.erase(remove_if(vec.begin(), vec.end(), [&]( const string& str )
+    				{
+        			return std::find(begin(useless), end(useless), str ) != end(useless);
+    				}), vec.end()); 
     			}
     		}
     		fout << vec[i] << " ";
