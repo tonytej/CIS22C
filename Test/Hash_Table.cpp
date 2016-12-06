@@ -1,25 +1,20 @@
-/*
-Antony Tejakusuma
-CIS22C
-Hash_Table.cpp
-*/
-
 #include "Hash_Table.h"
 #include <iostream>
 #include <assert.h>
 
 using namespace std;
 
-Hash_Table::Hash_Table(){
-    for (int i = 0; i < SIZE; i++){
-        Table[i] = " ";
-    }
-}
+Hash_Table::Hash_Table(){}
 
 Hash_Table::~Hash_Table(){}
 
 int Hash_Table::hash(string key){
-    
+    int index, sum = 0;
+    for(int i = 0; i < key.length(); i++)
+        sum += (int) key[i];
+    index = sum % SIZE;
+    return index;
+}
 
 int Hash_Table::count_bucket(int index){
     assert(index >= 0 and index < SIZE);
@@ -73,7 +68,7 @@ void Hash_Table::print_bucket(int index){
         cout << temp.get_title() << endl;
         cout << "by " << temp.get_artist() << endl;
         cout << "Genre: " << temp.get_genre() << endl;
-        cout << "Lyrics: $" << temp.get_lyrics() << endl << endl;
+        cout << "Lyrics: " << temp.get_lyrics() << endl << endl;
         Table[index].move_cursor();
     }
 }
@@ -86,8 +81,8 @@ void Hash_Table::print_table(){
             cout << "Bucket: " << i << endl;
             cout << temp.get_title() << endl;
             cout << "by " << temp.get_artist() << endl;
-            cout << "Genre: " << temp.get_Genre() << endl;
-            cout << "Lyrics: $" << temp.get_lyrics() << endl;
+            cout << "Genre: " << temp.get_genre() << endl;
+            cout << "Lyrics: " << temp.get_lyrics() << endl;
             cout << "Number of Songs at this bucket: " << Table[i].get_length() << endl;
             cout << "<---------------------->" << endl << endl;
         }

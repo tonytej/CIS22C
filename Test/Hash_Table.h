@@ -1,29 +1,22 @@
 #ifndef HASH_TABLE_H_
 #define HASH_TABLE_H_
 
-
 #include <string>
 #include "List.h"
-#include "Song.h"
-#include <map>
+#include "Song.cpp"
 using namespace std;
-
 
 class Hash_Table {
 public:
     /**Constructors*/
 
-
     Hash_Table();
     //constructor
-
 
     ~Hash_Table();
     //destructor
 
-
     /**Access Functions*/
-
 
     int hash(string key);
     //returns the hash value for the given key
@@ -32,54 +25,61 @@ public:
     //% the size the of the table
     //Key for this table: title + author
 
-
     int count_bucket(int index);
-    //counts the number of Books at this index
+    //counts the number of Songs at this index
     //returns the count
     //pre: 0<= index < SIZE
 
-
-
-    int search_by_title(Song t);
-    //Searches for t in the table
-    //returns the index at which t is located
-    //returns -1 if t is not in the table
-
-
-    bool search_by_artist(Song a);
-    //Searches for a in the table
-    //returns the index at which a is located
-    //returns -1 if a is not in the table
-
-
-    bool search_by_genre(Song g);
-    //Searches for g in the table
-    //returns the index at which g is located
-    //returns -1 if g is not in the table
-
+    int find(Song b);
+    //Searches for b in the table
+    //returns the index at which b is located
+    //returns -1 if b is not in the table
 
     /**Manipulation Procedures*/
 
+    void insert(Song b);
+    //inserts a new Song into the table
+    //calls the hash function on the key to determine
+    //the correct bucket
 
-    void populate_map(string word, int index){
-        if ()
-        m.insert(word, index);
-    }
+    void remove(Song b);
+    //removes b from the table
+    //calls the hash function on the key to determine
+    //the correct bucket
 
+    /**Additional Functions*/
 
-    void display();
-    //Prints in the format:
-    //<------------------------>
+    void print_bucket(int index);
+    //Prints all the Songs at index
+    //pre: 0<= index < SIZE
+    //Should print according to the following formula:
+    //"Printing index <index#>
+    //skips two lines
+    //Next, prints each Song at that index in the format:
     //<title>
-    //by <artist>
-    //Genre: <genre>
-    //Lyrics: <lyrics>
+    //by <author>
+    //ISBN #: <isbn>
+    //Price: $<X.XX>
+    //followed by a blank line
+
+    void print_table();
+    //Prints the first Song at each index
+    //along with a count of the total Songs
+    //at each index by calling count_bucket
+    //as a helper function
+    //Prints in the format:
     //<----------------------->
+    //Bucket: <index>
+    //<title>
+    //by <author>
+    //ISBN #: <isbn>
+    //Price: $<X.XX>
+    //Number of Songs at this bucket: <number of elements at this index>
+    //<----------------------->
+
 private:
     static const int SIZE = 10;
-    string Table[SIZE];
-    map <string, int> m;
+    List<Song> Table[SIZE];
 };
-
 
 #endif /* HASH_TABLE_H_ */
