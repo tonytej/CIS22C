@@ -496,12 +496,14 @@ bool BST<bstitem>::downloadHelper_by_title(NodePtr root, string value, ofstream&
         outfile << "genre : " << root->data.get_genre() << endl;
         outfile << "lyrics :" << endl;
         outfile << root->data.get_lyrics() << endl;
+        cout << "Download successful!" << endl;
         return true;
     }
     else if(value < root->data.get_title())
     {
         if(root->left == NULL)
         {
+            cout << "Song not found" << endl;
             outfile << " Song not found"<< endl;
             return false;
         }
@@ -512,6 +514,7 @@ bool BST<bstitem>::downloadHelper_by_title(NodePtr root, string value, ofstream&
     {
         if(root->right == NULL)
         {
+            cout << "Song not found" << endl;
             outfile << " Song not found"<< endl;
                 return false;
         }
@@ -520,6 +523,7 @@ bool BST<bstitem>::downloadHelper_by_title(NodePtr root, string value, ofstream&
     }
     else
     {
+        cout << "Song not found" << endl;
         outfile << " Song not found"<< endl;
         return false;
     }

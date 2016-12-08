@@ -47,11 +47,12 @@ do
     cout << "2. Remove Song." << endl;
     cout << "3. Add Song." << endl;
     cout << "4. Search for Song." << endl;
-    cout << "5. Download Song." << endl;
+    cout << "5. Download Song (Write to file)." << endl;
     cout << "6. Statistics." << endl;
     cout << "7. End program." << endl;
     cout << "Type number according to your selection." << endl;
     cin >> input;
+    cout << endl;
     cin.ignore(1000, '\n');
 
     if (input == 1)
@@ -61,7 +62,9 @@ do
         cout << "1. Unsorted Song List" << endl;
         cout << "2. Song List sorted by Title" << endl;
         cout << "3. Return" << endl;
+        cout << "Type number according to your selection." << endl;
         cin >> in;
+        cout << endl;
         cin.ignore(1000, '\n');
         if (in == 1) {
             bst.preOrderPrint();    //call post or pre order print on the BST
@@ -115,12 +118,14 @@ do
         cout << "2. Search by Song Title" << endl;
         cout << "3. Search by Genre" << endl;
         cout << "4. Search by Lyrics" << endl;
+        cout << "Type number according to your selection." << endl;
         cin >> in;
+        cout << endl;
         cin.ignore(1000, '\n');
         if (in == 1)
         {
         string artist1;
-        cout << "Search a song by it's artist." << endl;
+        cout << "Search a song by its artist." << endl;
         cout << "Type in the artist name you wish to search for: " << endl;
         getline(cin, artist1);
         cout << endl;
@@ -167,23 +172,28 @@ do
         cout << "Type in the song title to be downloaded: " << endl;
         getline(cin, title2);
         bst.download_by_title(title2, fout);
+        
     }
 
     else if(input == 6)
     {
         int input2;
-        cout << "1. Number of Genres in the Soundtrack." << endl;
-        cout << "2. Number of Songs in each genre." << endl;
+        cout << "1. Sum of the number of words in every song lyrics in the list." << endl;
+        cout << "2. Average number of words in Song's lyrics." << endl;
         cout << "3. Number of Songs in list." << endl;
+        cout << "Type number according to your selection." << endl;
+        cin >> input2;
+        cout << endl;
+        cin.ignore(1000, '\n');
         if (input2 == 1) {
-
+            cout << se.getTotalWords() << " words." << endl;
         }
         if (input2 == 2) {
-
+            cout << se.averageWords() << " words." << endl;
         }
 
         if (input2 == 3) {
-            cout << bst.getSize() << endl;
+            cout << bst.getSize() << " songs." << endl;
         }
 
     }

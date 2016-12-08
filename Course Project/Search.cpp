@@ -16,6 +16,7 @@ class Search {
 							"very", "in", "on", "at", "before", "after", "into", "over", "through", "along"};
 		vector<string> files = { "almightygosh.txt", "areweready.txt", "byebye.txt", "electrify.txt", "explotar.txt", "highandlow.txt", "painting.txt",
 							 "paperroute.txt", "porcelain.txt", "raging.txt", "sameoldblues.txt", "sendthemoff.txt", "shelter.txt", "surprise.txt", "tearingmeup.txt"};
+		int totalWords;
 	public:
 		Search(){
 			ht = NULL;
@@ -54,6 +55,7 @@ class Search {
 		}
 
 		void buildAssignmentTable(){
+			totalWords = 0;
 			delete hts;
 			hts = new Hash_Table_Search();
 			int count = 0;
@@ -95,6 +97,7 @@ class Search {
 			    			count++;
 			    		}
 					}
+					totalWords += vec.size();
 				}		
 			}
 		}
@@ -181,7 +184,14 @@ class Search {
 				ht->print_bucket(index);
 				cout << endl;
 			}
-			
+		}
+
+		int getTotalWords(){
+			return totalWords;
+		}
+
+		int averageWords(){
+			return (totalWords / files.size());
 		}
 };
 
