@@ -24,6 +24,8 @@ class Search {
 			fout << s.get_genre() << endl << endl << endl;
 			fout << s.get_lyrics() << endl;
 			files.push_back("output.txt");
+			buildAssignmentTable();
+			buildInvertedIndex();
 		}
 
 		void remove(string title){
@@ -37,13 +39,17 @@ class Search {
 				getline(fin, line);
 				getline(fin, line);
 				if(line == title){
+					cout << "removed" << endl;
 					files.erase(std::remove(files.begin(), files.end(), files[i]), files.end());
 				}
 			}
+			buildAssignmentTable();
+			buildInvertedIndex();
 		}
 
 		void buildAssignmentTable(){
 			int count = 0;
+			cout << files.size() << endl;
 			for (int i = 0; i < files.size(); i++){
 				ifstream fin(files[i]);
 				if(fin.fail()){
@@ -88,7 +94,7 @@ class Search {
 
 		void buildInvertedIndex(){
 			int count = 0;
-			for (int i = 0; i < 15; i++){
+			for (int i = 0; i < files.size(); i++){
 				Song s;
 				ifstream fin(files[i]);
 				if(fin.fail()){
@@ -100,6 +106,7 @@ class Search {
 				getline(fin, line);
 				s.set_artist(line);
 				getline(fin, line);
+				cout << line << endl;
 				s.set_title(line);
 				getline(fin, line);
 				s.set_genre(line);
