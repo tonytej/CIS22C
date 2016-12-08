@@ -17,13 +17,13 @@ class Search {
 		vector<string> files = { "almightygosh.txt", "areweready.txt", "byebye.txt", "electrify.txt", "explotar.txt", "highandlow.txt", "painting.txt",
 							 "paperroute.txt", "porcelain.txt", "raging.txt", "sameoldblues.txt", "sendthemoff.txt", "shelter.txt", "surprise.txt", "tearingmeup.txt"};
 	public:
-		void addFiles(string filename){
+		/*void addFile(Song s){
 			files.push_back(filename);
-			buildAssignmentTable();
-			buildInvertedIndex();
+		}*/
+
+		void removeFile(string filename){
+			files.erase(std::remove(files.begin(), files.end(), filename), files.end());
 		}
-
-
 
 		void buildAssignmentTable(){
 			int count = 0;
@@ -92,7 +92,23 @@ class Search {
 				string lyric;
 
 				while(getline(fin, line)){
-					lyric += "\n" + line;
+					lyric += "\n\t" + line;
+					s.set_lyrics(lyric);
+				}
+
+				ifstream fin1(files[i]);
+				if(fin1.fail()){
+					cout << "Input failed to open" << endl;
+					exit(-1);
+				}
+
+				getline(fin1, line);
+				getline(fin1, line);
+				getline(fin1, line);
+				getline(fin1, line);
+				getline(fin1, line);
+
+				while(getline(fin1, line)){
 					
 					vector<string> vec;
 					istringstream iss(line);
@@ -113,8 +129,7 @@ class Search {
 			    		}
 			    		ht.insert(hts.find(vec[k]), s);
 					}
-				}
-				s.set_lyrics(lyric);		
+				}		
 			}
 		}
 
@@ -125,13 +140,19 @@ class Search {
 		void print_hts(){
 			hts.print();
 		}
+
+		void searchKeyword(string word){
+			buildAssignmentTable();
+			buildInvertedIndex();
+			int index = hts.find(word);
+			ht.print_bucket(index);
+		}
 };
 
 int main(){
 	Search s;
-	s.buildAssignmentTable();
-	s.buildInvertedIndex();
-	s.print_ht();
+	//s.removeFile()
+	s.searchKeyword("surprise");
 	//s.print_hts();
 }
 

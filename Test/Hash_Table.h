@@ -32,6 +32,7 @@ public:
     //returns the count
     //pre: 0<= index < SIZE*/
 
+
     bool find(Song b);
     //Searches for b in the table
     //returns the index at which b is located
@@ -39,18 +40,14 @@ public:
 
     /**Manipulation Procedures*/
 
+    void print_bucket(int index);
+
     void insert(int i, Song s);
     //inserts a new Song into the table
     //calls the hash function on the key to determine
     //the correct bucket
 
-    void print(){
-        for(int i = 0; i < SIZE; i++){
-            cout << "Table[" << i << "]: ";
-            Table[i].inOrderPrint(cout);
-            cout << endl;
-        }
-    }
+    void print();
 
     /*void remove(Song b);
     //removes b from the table

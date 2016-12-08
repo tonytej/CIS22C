@@ -32,6 +32,18 @@ void Hash_Table::insert(int i, Song s){
     Table[index].insert(s);
 }
 
+void Hash_Table::print_bucket(int index){
+    Table[index].inOrderPrint(cout);
+}
+
+void Hash_Table::print(){
+    for(int i = 0; i < SIZE; i++){
+        cout << "Table[" << i << "]: ";
+        Table[i].inOrderPrint(cout);
+        cout << endl;
+    }
+}
+
 /*void Hash_Table::remove(Song b){
     int TableIndex = hash(b.get_title()+b.get_artist()); 
     if(Table[TableIndex].get_length() != 0){
