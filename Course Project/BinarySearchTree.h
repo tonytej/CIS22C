@@ -125,6 +125,8 @@ class BinarySearchTree
         //calls the postOrderPrintHelper function to print out the values
         //stored in the Binary Search Tree
         //If the tree is empty, prints nothing
+
+        void statistics();
 };
 
 #endif /* BINARYSEARCHTREE_H_ */
@@ -347,7 +349,7 @@ void BinarySearchTree<bstitem>::inOrderPrintHelper(NodePtr root, ostream& s){
     } else {
         inOrderPrintHelper(root->left, s);
         (root->data).print_song();
-        cout << endl;
+        s << endl;
         inOrderPrintHelper(root->right, s);
     }
 }
@@ -362,7 +364,8 @@ void BinarySearchTree<bstitem>::preOrderPrintHelper(NodePtr root, ostream& s){
     if(root == NULL){
         return;
     } else {
-        s << root->data << " ";
+        root->data.print_song();
+        s << endl;
         preOrderPrintHelper(root->left, s);
         preOrderPrintHelper(root->right, s);
     }
@@ -380,7 +383,8 @@ void BinarySearchTree<bstitem>::postOrderPrintHelper(NodePtr root, ostream& s){
     } else {
         postOrderPrintHelper(root->left, s);
         postOrderPrintHelper(root->right, s);
-        s << root->data << " ";
+        root->data.print_song();
+        s << endl;
     }
 }
 
@@ -388,4 +392,3 @@ template<class bstitem>
 void BinarySearchTree<bstitem>::postOrderPrint(ostream& s){
     postOrderPrintHelper(root, s);
 }
-

@@ -17,12 +17,29 @@ class Search {
 		vector<string> files = { "almightygosh.txt", "areweready.txt", "byebye.txt", "electrify.txt", "explotar.txt", "highandlow.txt", "painting.txt",
 							 "paperroute.txt", "porcelain.txt", "raging.txt", "sameoldblues.txt", "sendthemoff.txt", "shelter.txt", "surprise.txt", "tearingmeup.txt"};
 	public:
-		/*void addFile(Song s){
-			files.push_back(filename);
-		}*/
+		void insert(Song s){
+			ofstream fout("output.txt");
+			fout << s.get_artist() << endl;
+			fout << s.get_title() << endl;
+			fout << s.get_genre() << endl << endl << endl;
+			fout << s.get_lyrics() << endl;
+			files.push_back("output.txt");
+		}
 
-		void removeFile(string filename){
-			files.erase(std::remove(files.begin(), files.end(), filename), files.end());
+		void remove(string title){
+			for (int i = 0; i < files.size(); i++){
+				ifstream fin(files[i]);
+				if(fin.fail()){
+					cout << "Input failed to open" << endl;
+					exit(-1);
+				}
+				string line;
+				getline(fin, line);
+				getline(fin, line);
+				if(line == title){
+					files.erase(std::remove(files.begin(), files.end(), files[i]), files.end());
+				}
+			}
 		}
 
 		void buildAssignmentTable(){
@@ -148,13 +165,6 @@ class Search {
 			ht.print_bucket(index);
 		}
 };
-
-int main(){
-	Search s;
-	//s.removeFile()
-	s.searchKeyword("surprise");
-	//s.print_hts();
-}
 
 
 /*1. Read in a word from a file
