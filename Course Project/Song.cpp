@@ -61,10 +61,10 @@ void Song::set_lyrics(string l) {
 
 /**Additional Functions*/
 void Song::print_song() {
-    cout << "Title: " << "\t\t" << title << endl;
-    cout << "By: " << "\t\t" << artist << endl;
-    cout << "Genre: " << "\t\t" << genre << endl;
-    cout << "Lyrics: " << "\t\t" << lyrics << endl;
+    cout << "Title: " << "\t" << title << endl;
+    cout << "By: " << "\t" << artist << endl;
+    cout << "Genre: " << "\t" << genre << endl;
+    cout << "Lyrics: " << "\t" << lyrics << endl;
 }
 
 

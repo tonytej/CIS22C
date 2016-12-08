@@ -95,8 +95,8 @@ do
         string artist;
         string genre;
         string lyrics;
+        //cin.ignore(1000, '\n');
         cout << "Title: ";
-        cin.ignore(1000, '\n');
         getline(cin, title);
         cout << "Artist: ";
         getline(cin, artist);
@@ -114,25 +114,13 @@ do
     {
         int in;
         cout << "Search Submenu" << endl;
-        cout << "1. Search by Artist" << endl;
-        cout << "2. Search by Song Title" << endl;
-        cout << "3. Search by Genre" << endl;
-        cout << "4. Search by Lyrics" << endl;
+        cout << "1. Search by Song Title" << endl;
+        cout << "2. Search by Lyrics (keyword)" << endl;
         cout << "Type number according to your selection." << endl;
         cin >> in;
         cout << endl;
         cin.ignore(1000, '\n');
         if (in == 1)
-        {
-        string artist1;
-        cout << "Search a song by its artist." << endl;
-        cout << "Type in the artist name you wish to search for: " << endl;
-        getline(cin, artist1);
-        cout << endl;
-        bst.find_by_artist(artist1);
-        }
-
-        if (in == 2)
         {
         string title1;
         cout << "Search a song by the song name." << endl;
@@ -142,27 +130,17 @@ do
         bst.find_by_title(title1);
         }
 
-        if (in == 3)
+        if (in == 2)
         {
-            string genre1;
-            cout << "Search a song by genre." << endl;
-            cout << "Type in the genre you wish to search for: " << endl;
-            getline(cin, genre1);
-            cout << endl;
-            bst.find_by_genre(genre1);
+        string title1;
+        string keyword;
+        cout << "Search a song by the lyrics." << endl;
+        cout << "Type in a word you wish to search for: " << endl;
+        cin >> keyword;
+        cin.ignore(1000, '\n');
+        cout << endl;
+        se.searchKeyword(keyword);
         }
-
-        if (in == 4)
-        {
-            string keyword;
-            cout << "Search a song by the lyrics." << endl;
-            cout << "Type in a word you wish to search for: " << endl;
-            cin >> keyword;
-            cin.ignore(1000, '\n');
-            cout << endl;
-            se.searchKeyword(keyword);
-        }
-
     }
 
     else if (input == 5)
@@ -172,7 +150,7 @@ do
         cout << "Type in the song title to be downloaded: " << endl;
         getline(cin, title2);
         bst.download_by_title(title2, fout);
-        
+
     }
 
     else if(input == 6)
