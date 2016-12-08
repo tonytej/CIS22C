@@ -43,10 +43,12 @@ class Search {
 				getline(fin, line);
 				getline(fin, line);
 				if(line == title){
-					cout << "removed" << endl;
 					files.erase(std::remove(files.begin(), files.end(), files[i]), files.end());
+					cout << "Song has been successfully removed." << endl;
+					return;
 				}
 			}
+			cout << "Song is not on the list." << endl;
 			buildAssignmentTable();
 			buildInvertedIndex();
 		}

@@ -59,8 +59,7 @@ class BST
 
 
 
-
-
+        bool downloadHelper_by_title(NodePtr root, string value, ofstream& outfile);
         bool findHelper_by_title(NodePtr root, string value);
         bool findHelper_by_artist(NodePtr root, string value);
         bool findHelper_by_genre(NodePtr root, string value);
@@ -133,8 +132,7 @@ class BST
         //calls the postOrderPrintHelper function to print out the values
         //stored in the Binary Search Tree
         //If the tree is empty, prints nothing
-
-
+        bool download_by_title(string value,ofstream& outfile);
         bool find_by_title(string value);
         bool find_by_artist(string value);
         bool find_by_genre(string value);
@@ -357,6 +355,7 @@ typename BST<bstitem>::NodePtr BST<bstitem>::removeHelper(NodePtr root, string v
 {
     if(root == NULL)
     {
+        cout << "Song is not on the list."<< endl;
         return root;
     }
     else if(value < root->data.get_title())
@@ -372,6 +371,7 @@ typename BST<bstitem>::NodePtr BST<bstitem>::removeHelper(NodePtr root, string v
         if(root->left == NULL && root->right == NULL)
         {
             delete root;
+            root = NULL;
         }
         else if(root->left != NULL && root->right == NULL)
         {
@@ -415,7 +415,8 @@ void BST<bstitem>::inOrderPrintHelper(NodePtr root)
     if(root != NULL)
     {
         inOrderPrintHelper(root->left);
-        cout << root->data.get_title() << endl;
+        (root->data).print_song();
+        cout << endl;
         inOrderPrintHelper(root->right);
     }
 }
@@ -436,7 +437,8 @@ void BST<bstitem>::preOrderPrintHelper(NodePtr root)
 {
     if(root != NULL)
     {
-        cout << root->data.get_title() << endl;
+        (root->data).print_song();
+        cout << endl;
         preOrderPrintHelper(root->left);
         preOrderPrintHelper(root->right);
     }
@@ -460,7 +462,66 @@ void BST<bstitem>::postOrderPrintHelper(NodePtr root)
     {
         postOrderPrintHelper(root->left);
         postOrderPrintHelper(root->right);
-        cout << root->data.get_title() <<endl;
+        (root->data).print_song();
+        cout << endl;
+    }
+}
+
+
+template <class bstitem>
+bool BST<bstitem>::download_by_title(string value, ofstream& outfile)
+{
+    assert(!isEmpty());
+    if (value == root->data.get_title())
+    {
+        outfile << root->data.get_title() << " - " << root->data.get_artist()<<endl;
+        outfile << "genre : " << root->data.get_genre() << endl;
+        outfile << "lyrics :" << endl;
+        outfile << root->data.get_lyrics() << endl;
+        return true;
+    }
+    else
+        return downloadHelper_by_title(root, value, outfile);
+}
+
+
+template <class bstitem>
+bool BST<bstitem>::downloadHelper_by_title(NodePtr root, string value, ofstream& outfile)
+{
+
+
+    if(root->data.get_title() == value)
+    {
+        outfile << root->data.get_title() << " - " << root->data.get_artist()<<endl;
+        outfile << "genre : " << root->data.get_genre() << endl;
+        outfile << "lyrics :" << endl;
+        outfile << root->data.get_lyrics() << endl;
+        return true;
+    }
+    else if(value < root->data.get_title())
+    {
+        if(root->left == NULL)
+        {
+            outfile << " Song not found"<< endl;
+            return false;
+        }
+        else
+            downloadHelper_by_title(root->left, value, outfile);
+    }
+    else if(value > root->data.get_title())
+    {
+        if(root->right == NULL)
+        {
+            outfile << " Song not found"<< endl;
+                return false;
+        }
+        else
+            downloadHelper_by_title(root->right, value, outfile);
+    }
+    else
+    {
+        outfile << " Song not found"<< endl;
+        return false;
     }
 }
 

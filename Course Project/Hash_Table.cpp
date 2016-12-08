@@ -38,7 +38,6 @@ void Hash_Table::print_bucket(int index){
 
 void Hash_Table::print(){
     for(int i = 0; i < SIZE; i++){
-        cout << "Table[" << i << "]: ";
         Table[i].inOrderPrint(cout);
         cout << endl;
     }
