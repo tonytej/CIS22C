@@ -35,7 +35,9 @@ public:
 
     /**Additional Functions*/
     void print_song();
-    bool operator==(Song& song);
+    bool operator==(const Song& song);
+    bool operator<(const Song& song);
+    bool operator>(const Song& song);
 
 
 };

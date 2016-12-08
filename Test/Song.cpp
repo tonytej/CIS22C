@@ -3,7 +3,7 @@
 #include <iomanip>
 
 
-Song::Song():title(""), artist(""), genre(0), lyrics(){};
+Song::Song():title(""), artist(""), genre(""), lyrics(""){};
 
 
 Song::Song(string t, string a, string g, string l) {
@@ -68,6 +68,15 @@ void Song::print_song() {
 }
 
 
-bool Song::operator==(Song& song) {
+bool Song::operator==(const Song& song) {
     return (title == song.title && artist == song.artist && genre==song.genre && lyrics == song.lyrics);
+}
+
+bool Song::operator<(const Song& song){
+    return (title < song.title);
+}
+
+
+bool Song::operator>(const Song& song){
+    return (title > song.title);
 }

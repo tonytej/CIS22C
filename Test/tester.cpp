@@ -4,9 +4,12 @@
 using namespace std;
 
 int main(){
-	Search s;
-	cout << 2 << endl;
-	s.search();
-	cout << 3 << endl;
-	s.print_hts();
+	string test = "Are We Ready";
+	string test1 = "High and Low";
+	
+	if(test < test1){
+		cout << test << endl;
+	} else {
+		cout << test1 << endl; 
+	}
 }

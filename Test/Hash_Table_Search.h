@@ -2,7 +2,6 @@
 #define Hash_Table_Search_H_
 
 #include <string>
-
 #include "wordid.cpp"
 
 using namespace std;
