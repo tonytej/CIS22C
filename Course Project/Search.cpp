@@ -10,13 +10,17 @@ using namespace std;
 
 class Search {
 	private:
-		Hash_Table ht;
-		Hash_Table_Search hts;
+		Hash_Table* ht;
+		Hash_Table_Search* hts;
 		string useless[21] = { "there", "a", "the" , "of", "to", "and", "but", "nor", "or", "some", "any",
 							"very", "in", "on", "at", "before", "after", "into", "over", "through", "along"};
 		vector<string> files = { "almightygosh.txt", "areweready.txt", "byebye.txt", "electrify.txt", "explotar.txt", "highandlow.txt", "painting.txt",
 							 "paperroute.txt", "porcelain.txt", "raging.txt", "sameoldblues.txt", "sendthemoff.txt", "shelter.txt", "surprise.txt", "tearingmeup.txt"};
 	public:
+		Search(){
+			ht = NULL;
+			hts = NULL;
+		}
 		void insert(Song s){
 			ofstream fout("output.txt");
 			fout << s.get_artist() << endl;
@@ -48,8 +52,9 @@ class Search {
 		}
 
 		void buildAssignmentTable(){
+			delete hts;
+			hts = new Hash_Table_Search();
 			int count = 0;
-			cout << files.size() << endl;
 			for (int i = 0; i < files.size(); i++){
 				ifstream fin(files[i]);
 				if(fin.fail()){
@@ -82,9 +87,9 @@ class Search {
 			    			}
 			    		}
 			    		wordID w(vec[k], -1);
-			    		if (hts.find(vec[k]) == -1){
+			    		if (hts->find(vec[k]) == -1){
 			    			w.setID(count);
-			    			hts.insert(w);
+			    			hts->insert(w);
 			    			count++;
 			    		}
 					}
@@ -93,6 +98,8 @@ class Search {
 		}
 
 		void buildInvertedIndex(){
+			delete ht;
+			ht = new Hash_Table();
 			int count = 0;
 			for (int i = 0; i < files.size(); i++){
 				Song s;
@@ -106,7 +113,6 @@ class Search {
 				getline(fin, line);
 				s.set_artist(line);
 				getline(fin, line);
-				cout << line << endl;
 				s.set_title(line);
 				getline(fin, line);
 				s.set_genre(line);
@@ -151,25 +157,29 @@ class Search {
 			    				}), vec.end());
 			    			}
 			    		}
-			    		ht.insert(hts.find(vec[k]), s);
+			    		ht->insert(hts->find(vec[k]), s);
 					}
 				}		
 			}
 		}
 
 		void print_ht(){
-			ht.print();
+			ht->print();
 		}
 
 		void print_hts(){
-			hts.print();
+			hts->print();
 		}
 
 		void searchKeyword(string word){
-			buildAssignmentTable();
-			buildInvertedIndex();
-			int index = hts.find(word);
-			ht.print_bucket(index);
+			int index = hts->find(word);
+			if (index < 0 or index > 1000){
+				cout << "Word not found." << endl;
+			} else {
+				ht->print_bucket(index);
+				cout << endl;
+			}
+			
 		}
 };
 
