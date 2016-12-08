@@ -10,8 +10,8 @@ class Song {
 private:
     string title;
     string artist;
-    String genre;
-    String lyrics;
+    string genre;
+    string lyrics;
 
 
 public:
@@ -35,7 +35,9 @@ public:
 
     /**Additional Functions*/
     void print_song();
-    bool operator==(Song& song);
+    bool operator==(const Song& song);
+    bool operator<(const Song& song);
+    bool operator>(const Song& song);
 
 
 };

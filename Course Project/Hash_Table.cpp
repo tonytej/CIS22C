@@ -1,12 +1,8 @@
-/*
-Antony Tejakusuma
-CIS22C
-Hash_Table.cpp
-*/
-
 #include "Hash_Table.h"
 #include <iostream>
 #include <assert.h>
+
+
 
 using namespace std;
 
@@ -14,44 +10,42 @@ Hash_Table::Hash_Table(){}
 
 Hash_Table::~Hash_Table(){}
 
-int Hash_Table::hash(string key){
-    int index, sum = 0;
-    for(int i = 0; i < key.length(); i++)
-        sum += (int) key[i];
-    index = sum % SIZE;
+int Hash_Table::hash(int index){
     return index;
 }
 
-int Hash_Table::count_bucket(int index){
-    assert(index >= 0 and index < SIZE);
-    if(index >= 0 and index < SIZE){
-        return Table[index].get_length();
-    } else {
-        return -1;
-    }
-}
+/*int Hash_Table::count_bucket(int index){
+    return Table[index].getSize();
+}*/
 
-int Hash_Table::find(Song b){
+bool Hash_Table::find(Song b){
     for(int i = 0; i < SIZE; i++){
-        if(!Table[i].is_empty()){
-            Table[i].begin_cursor();
-            while(!Table[i].off_end()){  
-                if(Table[i].get_cursor() == b)
-                    return i;
-                Table[i].move_cursor();
-            }
+        if(Table[i].isEmpty()){
+            return false;
         }
+        return Table[i].find(b);
     }
-    return -1;
 }
 
-void Hash_Table::insert(Song b){
-    int index = hash(b.get_title()+b.get_author());
-    Table[index].add_end(b);
+void Hash_Table::insert(int i, Song s){
+    int index = hash(i);
+    Table[index].insert(s);
 }
 
-void Hash_Table::remove(Song b){
-    int TableIndex = hash(b.get_title()+b.get_author()); 
+void Hash_Table::print_bucket(int index){
+    Table[index].inOrderPrint(cout);
+}
+
+void Hash_Table::print(){
+    for(int i = 0; i < SIZE; i++){
+        cout << "Table[" << i << "]: ";
+        Table[i].inOrderPrint(cout);
+        cout << endl;
+    }
+}
+
+/*void Hash_Table::remove(Song b){
+    int TableIndex = hash(b.get_title()+b.get_artist()); 
     if(Table[TableIndex].get_length() != 0){
         int ListIndex = Table[TableIndex].linear_search(b);
         if(ListIndex != -1){
@@ -74,7 +68,7 @@ void Hash_Table::print_bucket(int index){
         cout << temp.get_title() << endl;
         cout << "by " << temp.get_artist() << endl;
         cout << "Genre: " << temp.get_genre() << endl;
-        cout << "Lyrics: $" << temp.get_lyrics() << endl << endl;
+        cout << "Lyrics: " << temp.get_lyrics() << endl << endl;
         Table[index].move_cursor();
     }
 }
@@ -87,10 +81,10 @@ void Hash_Table::print_table(){
             cout << "Bucket: " << i << endl;
             cout << temp.get_title() << endl;
             cout << "by " << temp.get_artist() << endl;
-            cout << "Genre: " << temp.get_Genre() << endl;
-            cout << "Lyrics: $" << temp.get_lyrics() << endl;
+            cout << "Genre: " << temp.get_genre() << endl;
+            cout << "Lyrics: " << temp.get_lyrics() << endl;
             cout << "Number of Songs at this bucket: " << Table[i].get_length() << endl;
             cout << "<---------------------->" << endl << endl;
         }
     }
-}
+}*/

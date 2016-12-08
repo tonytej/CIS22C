@@ -3,10 +3,10 @@
 #include <iomanip>
 
 
-Song::Song():title(""), artist(""), genre(0), lyrics(){};
+Song::Song():title(""), artist(""), genre(""), lyrics(""){};
 
 
-Song::Song(string t, string a, int i, double p) {
+Song::Song(string t, string a, string g, string l) {
     title = t;
     artist = a;
     genre = g;
@@ -27,15 +27,14 @@ string Song::get_artist() {
 }
 
 
-unsigned Song::get_genre() {
+string Song::get_genre() {
     return genre;
 }
 
 
-double Song::get_lyrics() {
+string Song::get_lyrics() {
     return lyrics;
 }
-
 
 /**Manipulation Procedures*/
 
@@ -50,27 +49,34 @@ void Song::set_artist(string a) {
 }
 
 
-void Song::set_genre(unsigned g) {
+void Song::set_genre(string g) {
     genre = g;
 }
 
 
-void Song::set_lyrics(double l) {
+void Song::set_lyrics(string l) {
     lyrics = l;
 }
 
 
 /**Additional Functions*/
 void Song::print_song() {
-    cout << Artist << endl;
-
-
-    cout << " - " << Song << endl;
-    cout << "Genre: " << genre << endl;
-    cout << "Lyrics: " << fixed << setprecision(2) << lyrics;
+    cout << "Title: " << "\t" << title << endl;
+    cout << "By: " << "\t" << artist << endl;
+    cout << "Genre: " << "\t" << genre << endl;
+    cout << "Lyrics: " << "\t" << lyrics << endl;
 }
 
 
-bool Song::operator==(Song& song) {
-    return (title == Song.title && artist==Song.artist && genre==Song.genre && lyrics == Song.lyrics);
+bool Song::operator==(const Song& song) {
+    return (title == song.title && artist == song.artist && genre==song.genre && lyrics == song.lyrics);
+}
+
+bool Song::operator<(const Song& song){
+    return (title < song.title);
+}
+
+
+bool Song::operator>(const Song& song){
+    return (title > song.title);
 }
