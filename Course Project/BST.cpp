@@ -56,6 +56,9 @@ class BST
         //private helper function for postOrderPrint
         //recursively prints tree values in postorder
 
+        void displaySortedHelper(NodePtr root);
+        void displayUnsortedHelper(NodePtr root);
+
 
 
 
@@ -132,6 +135,9 @@ class BST
         //calls the postOrderPrintHelper function to print out the values
         //stored in the Binary Search Tree
         //If the tree is empty, prints nothing
+
+        void displaySorted();
+        void displayUnsorted();
         bool download_by_title(string value,ofstream& outfile);
         bool find_by_title(string value);
         bool find_by_artist(string value);
@@ -395,8 +401,48 @@ typename BST<bstitem>::NodePtr BST<bstitem>::removeHelper(NodePtr root, string v
     return root;
 }
 
+//regular cout usage
+template <class bstitem>
+void BST<bstitem>::displaySorted()
+{
+    if(root != NULL)
+    {
+        displaySortedHelper(root);
+    }
+}
 
 
+template <class bstitem>
+void BST<bstitem>::displaySortedHelper(NodePtr root)
+{
+    if(root != NULL)
+    {
+        displaySortedHelper(root->left);
+        cout << (root->data).get_title() << " by " <<  (root->data).get_artist() << endl;
+        displaySortedHelper(root->right);
+    }
+}
+
+template <class bstitem>
+void BST<bstitem>::displayUnsorted()
+{
+    if(root != NULL)
+    {
+        displayUnsortedHelper(root);
+    }
+}
+
+
+template <class bstitem>
+void BST<bstitem>::displayUnsortedHelper(NodePtr root)
+{
+    if(root != NULL)
+    {
+        displayUnsortedHelper(root->left);
+        displayUnsortedHelper(root->right);
+        cout << (root->data).get_title() << " by " <<  (root->data).get_artist() << endl;
+    }
+}
 
 //regular cout usage
 template <class bstitem>
@@ -536,11 +582,7 @@ bool BST<bstitem>::find_by_title(string value)
     assert(!isEmpty());
     if (value == root->data.get_title())
     {
-        cout << "song found" << endl;
-        cout << root->data.get_title() << " - " << root->data.get_artist()<<endl;
-        cout << "genre : " << root->data.get_genre() << endl;
-        cout << "lyrics :" << endl;
-        cout << root->data.get_lyrics() << endl;
+        root->data.print_song();
         return true;
     }
     else
@@ -553,11 +595,7 @@ bool BST<bstitem>::findHelper_by_title(NodePtr root, string value)
 {
     if(root->data.get_title() == value)
     {
-        cout << "song found" << endl;
-        cout << root->data.get_title() << " - " << root->data.get_artist()<<endl;
-        cout << "genre : " << root->data.get_genre() << endl;
-        cout << "lyrics :" << endl;
-        cout << root->data.get_lyrics() << endl;
+        root->data.print_song();
         return true;
     }
     else if(value < root->data.get_title())

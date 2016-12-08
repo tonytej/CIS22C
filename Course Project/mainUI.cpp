@@ -67,12 +67,14 @@ do
         cout << endl;
         cin.ignore(1000, '\n');
         if (in == 1) {
-            bst.preOrderPrint();    //call post or pre order print on the BST
+            bst.displayUnsorted();
+            //bst.preOrderPrint();    //call post or pre order print on the BST
             cout << endl;
         }
 
         if (in == 2) {
-            bst.inOrderPrint();      //call inOrderPrint on the BST
+            bst.displaySorted();
+            //bst.inOrderPrint();      //call inOrderPrint on the BST
         }
 
         if (in == 3) {
@@ -189,7 +191,7 @@ do
 
 
 } while (input != -1);
-
+    
 
     return 0;
 }
