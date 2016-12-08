@@ -25,7 +25,7 @@ public:
     //% the size the of the table
     //Key for this table: title + author
 
-    int find(wordID b);
+    int find(string word);
     //Searches for b in the table
     //returns the index at which b is located
     //returns -1 if b is not in the table

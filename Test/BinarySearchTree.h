@@ -346,7 +346,7 @@ void BinarySearchTree<bstitem>::inOrderPrintHelper(NodePtr root, ostream& s){
         return;
     } else {
         inOrderPrintHelper(root->left, s);
-        s << (root->data).get_title() << ", ";
+        s << (root->data).get_title() << ". ";
         inOrderPrintHelper(root->right, s);
     }
 }

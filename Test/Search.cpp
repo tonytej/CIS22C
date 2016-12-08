@@ -14,19 +14,25 @@ class Search {
 		Hash_Table_Search hts;
 		string useless[21] = { "there", "a", "the" , "of", "to", "and", "but", "nor", "or", "some", "any",
 							"very", "in", "on", "at", "before", "after", "into", "over", "through", "along"};
-		string files[16] = { "almightygosh.txt", "areweready.txt", "byebye.txt", "electrify.txt", "explotar.txt", "highandlow.txt", "painting.txt",
+		vector<string> files = { "almightygosh.txt", "areweready.txt", "byebye.txt", "electrify.txt", "explotar.txt", "highandlow.txt", "painting.txt",
 							 "paperroute.txt", "porcelain.txt", "raging.txt", "sameoldblues.txt", "sendthemoff.txt", "shelter.txt", "surprise.txt", "tearingmeup.txt"};
 	public:
+		void addFiles(string filename){
+			files.push_back(filename);
+			buildAssignmentTable();
+			buildInvertedIndex();
+		}
+
+
+
 		void buildAssignmentTable(){
 			int count = 0;
-			for (int i = 0; i < 15; i++){
-				Song s;
+			for (int i = 0; i < files.size(); i++){
 				ifstream fin(files[i]);
 				if(fin.fail()){
 					cout << "Input failed to open" << endl;
 					exit(-1);
 				}
-				
 				string line;
 				getline(fin, line);
 				getline(fin, line);
@@ -53,7 +59,7 @@ class Search {
 			    			}
 			    		}
 			    		wordID w(vec[k], -1);
-			    		if (hts.find(w) == -1){
+			    		if (hts.find(vec[k]) == -1){
 			    			w.setID(count);
 			    			hts.insert(w);
 			    			count++;
@@ -87,7 +93,7 @@ class Search {
 
 				while(getline(fin, line)){
 					lyric += "\n" + line;
-					s.set_lyrics(lyric);
+					
 					vector<string> vec;
 					istringstream iss(line);
 					while (iss) {
@@ -105,15 +111,10 @@ class Search {
 			    				}), vec.end());
 			    			}
 			    		}
-			    		wordID w(vec[k], -1);
-			    		if (hts.find(w) == -1){
-			    			w.setID(count);
-			    			hts.insert(w);
-			    			ht.insert(w, s);
-			    			count++;
-			    		}
+			    		ht.insert(hts.find(vec[k]), s);
 					}
-				}		
+				}
+				s.set_lyrics(lyric);		
 			}
 		}
 
@@ -128,7 +129,8 @@ class Search {
 
 int main(){
 	Search s;
-	s.search();
+	s.buildAssignmentTable();
+	s.buildInvertedIndex();
 	s.print_ht();
 	//s.print_hts();
 }

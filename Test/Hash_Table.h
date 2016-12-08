@@ -20,7 +20,7 @@ public:
 
     /**Access Functions*/
 
-    int hash(wordID b);
+    int hash(int index);
     //returns the hash value for the given key
     //the hash value is the sum of
     //of the ASCII values of each char in the key
@@ -39,7 +39,7 @@ public:
 
     /**Manipulation Procedures*/
 
-    void insert(wordID b, Song s);
+    void insert(int i, Song s);
     //inserts a new Song into the table
     //calls the hash function on the key to determine
     //the correct bucket

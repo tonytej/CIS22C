@@ -10,8 +10,8 @@ Hash_Table::Hash_Table(){}
 
 Hash_Table::~Hash_Table(){}
 
-int Hash_Table::hash(wordID b){
-    return b.getID();
+int Hash_Table::hash(int index){
+    return index;
 }
 
 /*int Hash_Table::count_bucket(int index){
@@ -20,12 +20,15 @@ int Hash_Table::hash(wordID b){
 
 bool Hash_Table::find(Song b){
     for(int i = 0; i < SIZE; i++){
+        if(Table[i].isEmpty()){
+            return false;
+        }
         return Table[i].find(b);
     }
 }
 
-void Hash_Table::insert(wordID b, Song s){
-    int index = hash(b);
+void Hash_Table::insert(int i, Song s){
+    int index = hash(i);
     Table[index].insert(s);
 }
 

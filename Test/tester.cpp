@@ -1,15 +1,28 @@
-#include "Search.h"
+#include "BinarySearchTree.h"
+#include "Song.cpp"
 #include <iostream>
 
 using namespace std;
 
 int main(){
-	string test = "Are We Ready";
-	string test1 = "High and Low";
-	
-	if(test < test1){
-		cout << test << endl;
+	BinarySearchTree<Song> bst;
+	Song a("a", "a", "a", "a");
+	Song b("b", "b", "b", "b");
+	Song c("c", "c", "c", "c");
+	Song d("d", "d", "d", "d");
+	Song e("e", "e", "e", "e");
+	bst.insert(a);
+	bst.insert(b);
+	bst.insert(c);
+	bst.insert(d);
+
+	bst.inOrderPrint(cout);
+	if(!bst.find(e)){
+		cout << "did not found e" << endl;
+		bst.insert(e);
 	} else {
-		cout << test1 << endl; 
+		cout << "found e" << endl;
 	}
+
+	bst.inOrderPrint(cout);
 }

@@ -12,9 +12,9 @@ int Hash_Table_Search::hash(wordID b){
     return b.getID();
 }
 
-int Hash_Table_Search::find(wordID b){
+int Hash_Table_Search::find(string word){
     for(int i = 0; i < SIZE; i++){
-        if (Table[i] == b){
+        if (Table[i].getWord() == word){
             return i;
         }
     }
